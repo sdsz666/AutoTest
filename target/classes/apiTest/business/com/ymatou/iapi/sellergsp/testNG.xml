@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<suite name="sellergsp.iapi.ymatou.com" parallel="false">
+    <test name="testDemo1">
+        <!--<packages>-->
+        <!--<package name="com.testproj.Demo"/>-->
+        <!--</packages>-->
+        <classes>
+            <class name="apiTest.base.business.sellergsp.iapi.ymatou.com.ProdLiveVideoStandard.testcase.Tscase;"></class>
+        </classes>
+    </test>
+</suite>
