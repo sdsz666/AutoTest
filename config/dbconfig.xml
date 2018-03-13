@@ -7,7 +7,7 @@
 
 
     <environments default="ymtsit1">
-        <environment id="YmtRelease">
+        <environment id="YmtSellerReport">
             <transactionManager type="JDBC" />
             <dataSource type="POOLED">
                 <property name="driver"
@@ -16,6 +16,34 @@
                           value="jdbc:sqlserver://YmtRelease.db.ymatou.com;databaseName=YmtSellerReport" />
                 <property name="username" value="sa_test" />
                 <property name="password" value="ymtceshi@2017" />
+                <property name="poolPingQuery" value="SELECT 1+1" />
+                <property name="poolPingEnabled" value="true" />
+            </dataSource>
+        </environment>
+
+        <environment id="YmtRelease">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver"
+                          value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+                <property name="url"
+                          value="jdbc:sqlserver://YmtRelease.db.ymatou.com;databaseName=YmtRelease" />
+                <property name="username" value="sa_test" />
+                <property name="password" value="ymtceshi@2017" />
+                <property name="poolPingQuery" value="SELECT 1+1" />
+                <property name="poolPingEnabled" value="true" />
+            </dataSource>
+        </environment>
+
+        <environment id="biinputdb">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver"
+                          value="com.mysql.cj.jdbc.Driver" />
+                <property name="url"
+                          value="jdbc:mysql://mysql.ymatou.com:30001/biinputdb?useSSL=true" />
+                <property name="username" value="sa_test" />
+                <property name="password" value="ymtcs@2016" />
                 <property name="poolPingQuery" value="SELECT 1+1" />
                 <property name="poolPingEnabled" value="true" />
             </dataSource>

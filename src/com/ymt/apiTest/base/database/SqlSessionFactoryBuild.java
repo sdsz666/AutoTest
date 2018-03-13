@@ -1,5 +1,6 @@
 package apiTest.base.database;
 
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
@@ -14,6 +15,9 @@ import java.util.Map;
 
 public class SqlSessionFactoryBuild {
     private static Map<String,SqlSessionFactory> SqlSessionFactoryMap = new HashMap<>();
+    private static Map<Class<?>,Object> mapperMap = new HashMap<>();
+    private static Map<SqlSessionFactory,SqlSession> SqlSessionMap = new HashMap<>();
+
     private static SqlSessionFactoryBuild sqlSessionFactoryBuild = null;
     private static String dbconfigName = System.getProperty("user.dir") + File.separator + "config" + File.separator + "dbconfig.xml";
 
@@ -30,6 +34,7 @@ public class SqlSessionFactoryBuild {
             try {
                 SqlSessionFactory sqlSessionFactory = (new SqlSessionFactoryBuilder()).build(new FileReader(dbconfigName), envName);
                 SqlSessionFactoryMap.put(envName, sqlSessionFactory);
+                SqlSessionMap.put(sqlSessionFactory,sqlSessionFactory.openSession());
                 return sqlSessionFactory;
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -38,19 +43,33 @@ public class SqlSessionFactoryBuild {
         return null;
     }
 
-    @SuppressWarnings("unchecked")
-    public static <T> T getMapperSession(String envName,Class<T> type) {
-        SqlSessionFactory ssf = getSqlSessionFactory(envName);
-        if (!ssf.getConfiguration().hasMapper(type)){
-            ssf.getConfiguration().addMapper(type);
+    public static synchronized <T>  void addMapper(SqlSessionFactory ssf,Class<T> type){
+        if (mapperMap.keySet().contains(type)){
+            return ;
         }
 
-        InvocationHandler sqlMapperProxy = new SqlMapperProxy<T>(ssf.openSession(), type);
+        ssf.getConfiguration().addMapper(type);
+        T mapper =SqlSessionMap.get(ssf).getMapper(type);
 
-        T mapperProxy = (T) Proxy.newProxyInstance(SqlMapperProxy.class.getClassLoader(),
-                ssf.openSession().getMapper(type).getClass().getInterfaces(),
+        InvocationHandler sqlMapperProxy = new SqlMapperProxy<T>(SqlSessionMap.get(ssf), type);
+
+        T mapperProxy = (T)Proxy.newProxyInstance(SqlMapperProxy.class.getClassLoader(),
+                mapper.getClass().getInterfaces(),
                 sqlMapperProxy);
+        mapperMap.put(type, mapperProxy);
 
-        return mapperProxy;
     }
+
+
+    public static <T> T getMapperSession(String envName,Class<T> type) {
+        SqlSessionFactory ssf = getSqlSessionFactory(envName);
+        if (!mapperMap.keySet().contains(type)){
+            addMapper(ssf,type);
+        }
+
+
+        return (T) mapperMap.get(type);
+    }
+
+
 }

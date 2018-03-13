@@ -14,11 +14,6 @@ public class SqlMapperProxy<T> implements InvocationHandler {
 
     private T mapper;
 
-    public SqlMapperProxy(SqlSession sqlSession,Class<T> type){
-        this.sqlSession = sqlSession;
-        this.mapper =  sqlSession.getMapper(type);
-    }
-
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         Object ret = method.invoke(mapper, args);
@@ -51,6 +46,11 @@ public class SqlMapperProxy<T> implements InvocationHandler {
             }
         }
         return ret;
+    }
+
+    public SqlMapperProxy(SqlSession sqlSession,Class<T> type){
+        this.sqlSession = sqlSession;
+        this.mapper =  sqlSession.getMapper(type);
     }
 
 }
