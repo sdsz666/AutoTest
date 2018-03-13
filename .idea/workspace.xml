@@ -112,7 +112,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/ymt/apiTest/testBubbleSort.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="294">
-              <caret line="36" column="20" lean-forward="false" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
+              <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding>
                 <element signature="method#BubbleSort#0;class#testBubbleSort#0" expanded="false" />
               </folding>
@@ -281,11 +281,6 @@
             <path>
               <item name="AutoTest" type="b2602c69:ProjectViewProjectNode" />
               <item name="AutoTest" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AutoTest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AutoTest" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -308,19 +303,6 @@
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="ymt" type="462c0819:PsiDirectoryNode" />
               <item name="apiTest" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AutoTest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AutoTest" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AutoTest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AutoTest" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -668,7 +650,7 @@
       <updated>1520304227976</updated>
       <workItem from="1520304236291" duration="1670000" />
       <workItem from="1520339046619" duration="102858000" />
-      <workItem from="1520926458000" duration="20193000" />
+      <workItem from="1520926458000" duration="21261000" />
     </task>
     <servers />
   </component>
@@ -705,7 +687,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="124721000" />
+    <option name="totallyTimeSpent" value="125789000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1175,7 +1157,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/ymt/apiTest/testBubbleSort.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
-          <caret line="36" column="20" lean-forward="false" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
+          <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding>
             <element signature="method#BubbleSort#0;class#testBubbleSort#0" expanded="false" />
           </folding>

@@ -34,7 +34,7 @@ public class testBubbleSort {
                     temp=array[j];
                     array[i]=array[j];
                     array[j]=temp;
-                    
+
                 }
             }
 
