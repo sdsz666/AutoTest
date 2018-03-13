@@ -1,4 +1,4 @@
-package apiTest;
+package com.ymt.apiTest;
 
 public class testBubbleSort {
 
@@ -20,6 +20,7 @@ public class testBubbleSort {
         }
         System.out.println(array.length);
 
+
     }
 
 
@@ -34,8 +35,6 @@ public class testBubbleSort {
                     temp=array[j];
                     array[i]=array[j];
                     array[j]=temp;
-
-
                 }
             }
 
