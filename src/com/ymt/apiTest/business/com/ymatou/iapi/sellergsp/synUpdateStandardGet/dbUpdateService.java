@@ -1,13 +1,7 @@
 package com.ymt.apiTest.business.com.ymatou.iapi.sellergsp.synUpdateStandardGet;
 
-import com.ymt.apiTest.DbTools.Mysql.MySql;
-import com.ymt.apiTest.DbTools.Mysql.Seller_dsr;
-import com.ymt.apiTest.DbTools.Mysql.Seller_level;
-import com.ymt.apiTest.DbTools.Mysql.Ymt_DSRAverageStatistics;
-import com.ymt.apiTest.DbTools.SqlServer.SqlServer;
-import com.ymt.apiTest.DbTools.SqlServer.Ymt_SellerBasicInfo;
-import com.ymt.apiTest.DbTools.SqlServer.Ymt_SellerInfo;
-import com.ymt.apiTest.DbTools.SqlServer.Ymt_SellerManagingAbilityDTO;
+import com.ymt.apiTest.DbTools.Mysql.*;
+import com.ymt.apiTest.DbTools.SqlServer.*;
 import com.sun.media.jfxmedia.logging.Logger;
 
 import java.math.BigDecimal;
@@ -17,26 +11,104 @@ import java.util.List;
 import java.util.Map;
 
 public  class dbUpdateService {
+
+
+
     public Seller_level seller_level;
     public Seller_dsr seller_dsr;
-    public Ymt_SellerBasicInfo ymt_sellerBasicInfo;
+    public Ymt_SellerBasicInfo Sql_ymt_sellerBasicInfo;
+    public Ymt_sellerbasicinfo MySql_Ymt_sellerbasicinfo;
     public Ymt_SellerInfo ymt_sellerInfo;
     public Ymt_DSRAverageStatistics ymt_dsrAverageStatistics;
     public Ymt_SellerManagingAbilityDTO ymt_sellerManagingAbilityDTO;
+    public Ymt_ProdLiveVideoStandard ymt_prodLiveVideoStandard;
+
+    final Integer[] continentConf = {1, 2, 3, 5};
+    final Integer[] countryConf = {0, 1, 2, 3, 4, 5, 6, 7, 8, 48};
+
 
     public dbUpdateService() {
         seller_level = MySql.Seller_levelMapper();
         seller_dsr = MySql.Seller_dsrMapper();
-        ymt_sellerBasicInfo = SqlServer.Ymt_SellerBasicInfoMapper();
+        Sql_ymt_sellerBasicInfo = SqlServer.Ymt_SellerBasicInfoMapper();
+        MySql_Ymt_sellerbasicinfo= MySql.Ymt_sellerbasicinfoMapper();
         ymt_sellerInfo = SqlServer.Ymt_SellerInfoMapper();
         ymt_dsrAverageStatistics = MySql.Ymt_DSRAverageStatisticsMapper();
         ymt_sellerManagingAbilityDTO = SqlServer.Ymt_SellerManagingAbilityDTOMapper();
+        ymt_prodLiveVideoStandard=SqlServer.Ymt_ProdLiveVideoStandardMapper();
+    }
+
+    //根据sellerID清理表里的数据
+    public void clearResult(int SellerId){
+        ymt_prodLiveVideoStandard.delete_BySellerId(SellerId);
+    }
+
+    //修改买手入驻时间
+    public void updateApproveTime(int SellerId,int day){
+        ymt_sellerInfo.update_ApproveTime_BySellerId(SellerId,day);
+    }
+
+    //修改买手等级    Inactive   Active   Warning List  Semi-Pro    Pro   Top  Newbie
+    public void updateSellerLevel(int SellerId,String sellerLevel){
+        seller_level.update_sellerLevel_BySellerId(SellerId,sellerLevel);
+    }
+
+    //修改买手所在国家和大洲
+    public void updateCountryContinent(int sellerId,int CountryId,int ContinentID){
+        Sql_ymt_sellerBasicInfo.update_ContinentId_BySellerIdAndContinentId(sellerId,CountryId,ContinentID);
+        MySql_Ymt_sellerbasicinfo.update_ContinentIdandCountryId(sellerId,CountryId,ContinentID);
+    }
+
+    //修改买手Dsr
+    public void updateSellerDsr(int SellerId,double dsrScore){
+        seller_dsr.update_sellerDsr_BySellerId(SellerId,dsrScore);
+    }
+
+    //修改买手所在大洲Dsr
+    public void updateContinentDsr(int SellerId,double dsrScore){
+        //查询买手所比对的大洲
+        Integer ContinentID= getSellerContinentID(SellerId).get("ContinentID");
+
+        String Ddate=ymt_dsrAverageStatistics.select_MaxDdate();
+
+
+
+
+    }
+
+    //根据买手ID获取买手应该比对的大洲ID
+    public Map<String,Integer> getSellerContinentID(int sellerId) {
+
+        Map<String, Integer> temp = MySql_Ymt_sellerbasicinfo.select_CCID_BySellerId(sellerId);
+        Integer countryId = temp.get("CountryId");
+        Integer continentId = temp.get("ContinentID");
+
+        List<Integer> continentConfList = Arrays.asList(continentConf);
+        List<Integer> countryConfList = Arrays.asList(countryConf);
+
+        if (countryConfList.contains(countryId)) {
+            continentId = continentId + 10000;
+        } else if (continentConfList.contains(continentId)) {
+            continentId = continentId * 10000;
+        } else if (continentId == 1 || continentId == 7) {
+            continentId = 7 * 10000;
+        }
+        Map<String,Integer> res = null;
+        res.put("CountryId",countryId);
+        res.put("ContinentID",continentId);
+        return res;
     }
 
 
-    public void updateTool(Seller_level seller_level,Seller_dsr seller_dsr,Ymt_SellerBasicInfo ymt_sellerBasicInfo,
-                           Ymt_SellerInfo ymt_sellerInfo,Ymt_DSRAverageStatistics ymt_dsrAverageStatistics,Ymt_SellerManagingAbilityDTO ymt_sellerManagingAbilityDTO,
-                            int sellerId, boolean EnterCase, String sellerLevel, boolean dsrCase,
+
+
+
+
+
+
+
+
+    public void updateTool(int sellerId, boolean EnterCase, String sellerLevel, boolean dsrCase,
                            double OrderCancelRate, double OrderCheatingRate, double OrderLapTimeRate, double OrderComplainRate) {
 
 
@@ -58,15 +130,17 @@ public  class dbUpdateService {
         int continentId = getSellerContinentID(sellerId).get("ContinentID").intValue();
         String Ddate=ymt_dsrAverageStatistics.select_MaxDdate();
         if (dsrCase) {
-            ymt_dsrAverageStatistics.update_PerDSR_ByContinentID(continentId,dsr - 0.01,Ddate);
+            ymt_dsrAverageStatistics.update_PerDSR_ByContinentID(continentId,dsr - 0.01);
         } else {
-            ymt_dsrAverageStatistics.update_PerDSR_ByContinentID(continentId, dsr,Ddate);
+            ymt_dsrAverageStatistics.update_PerDSR_ByContinentID(continentId, dsr);
         }
 
         //更新买手经营能力
         ymt_sellerManagingAbilityDTO.insert_item_ByParameters(sellerId,
                 OrderCancelRate, OrderCheatingRate, OrderLapTimeRate, OrderComplainRate);
     }
+
+    //获取程序需要判断的所有数据
     public String getDataTool(int sellerId){
         String approveTime;
         String sellerLevel;
@@ -113,30 +187,6 @@ public  class dbUpdateService {
                 OrderCancelRate+" 揽件超时率"+OrderLapTimeRate+" 物流异常率"+OrderCheatingRate+" 订单取消率"+OrderCancelRate);*/
     }
 
-
-    public Map<String,Integer> getSellerContinentID(int sellerId) {
-        Map<String,Integer> res=new HashMap<String,Integer>();
-
-        Map<String, Object> temp = ymt_sellerBasicInfo.select_ContinentIdAndCountryId_BySellerId(sellerId);
-        Integer countryId = (Integer) temp.get("CountryId");
-        Integer continentId = (Integer) temp.get("ContinentID");
-
-        Integer[] continentConf = {1, 2, 3, 5};
-        Integer[] countryConf = {0, 1, 2, 3, 4, 5, 6, 7, 8, 48};
-        List<Integer> continentConfList = Arrays.asList(continentConf);
-        List<Integer> countryConfList = Arrays.asList(countryConf);
-
-        if (countryConfList.contains(countryId)) {
-            continentId = continentId + 10000;
-        } else if (continentConfList.contains(continentId)) {
-            continentId = continentId * 10000;
-        } else if (continentId == 1 || continentId == 7) {
-            continentId = 7 * 10000;
-        }
-        res.put("CountryId",countryId);
-        res.put("ContinentID",continentId);
-        return res;
-    }
 
 
     public static void main(String args[]) {

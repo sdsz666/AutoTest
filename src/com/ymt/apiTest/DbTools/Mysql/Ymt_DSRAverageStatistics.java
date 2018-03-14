@@ -7,9 +7,9 @@ import org.apache.ibatis.annotations.Update;
 
 public interface Ymt_DSRAverageStatistics {
     //修改买手所在大洲地区的DSR7分位
-    @Update("update ymt_DSRAverageStatistics set Per_DSR=#{Per_DSR},Ddate=#{Ddate} where ContinentID=#{ContinentID}")
+    @Update("update ymt_DSRAverageStatistics set Per_DSR=#{Per_DSR} where ContinentID=#{ContinentID}")
     @Options(flushCache = true)
-    public int update_PerDSR_ByContinentID(@Param("ContinentID")int ContinentID, @Param("Per_DSR") double Per_DSR,@Param("Ddate")String Ddate);
+    public int update_PerDSR_ByContinentID(@Param("ContinentID")int ContinentID, @Param("Per_DSR") double Per_DSR);
 
     //根据大洲ID获取DSR7分位
     @Select("select max(Per_DSR) from ymt_DSRAverageStatistics where ContinentID=#{ContinentID}")

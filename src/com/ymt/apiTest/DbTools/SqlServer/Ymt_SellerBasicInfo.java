@@ -9,9 +9,9 @@ import java.util.Map;
 
 public interface Ymt_SellerBasicInfo {
     //修改买手所在的洲，欧洲3，澳洲5，亚洲2，非洲6，北美洲1，南美洲7
-    @Update("update  ymt_SellerBasicInfo  set ContinentID=#{ContinentID} where SellerID=#{SellerID}")
+    @Update("update  ymt_SellerBasicInfo  set ContinentID=#{ContinentID},CountryId=#{CountryId} where SellerID=#{SellerID}")
     @Options(flushCache = true)
-    public int  update_ContinentId_BySellerIdAndContinentId(@Param("SellerID") int SellerID, @Param("ContinentID")int ContinentID);
+    public int  update_ContinentId_BySellerIdAndContinentId(@Param("SellerID") int SellerID,@Param("CountryId")int CountryId, @Param("ContinentID")int ContinentID);
 
     //获取买手所在的洲和国家
     @Select("select ContinentID,CountryId from ymt_SellerBasicInfo where SellerID=#{SellerId}")

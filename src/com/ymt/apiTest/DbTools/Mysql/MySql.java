@@ -12,5 +12,8 @@ public class MySql {
     public static Ymt_DSRAverageStatistics Ymt_DSRAverageStatisticsMapper(){
         return SqlSessionFactoryBuild.getMapperSession("biinputdb", Ymt_DSRAverageStatistics.class);
     }
+    public static Ymt_sellerbasicinfo Ymt_sellerbasicinfoMapper(){
+        return SqlSessionFactoryBuild.getMapperSession("biinputdb",Ymt_sellerbasicinfo.class);
+    }
 }
 

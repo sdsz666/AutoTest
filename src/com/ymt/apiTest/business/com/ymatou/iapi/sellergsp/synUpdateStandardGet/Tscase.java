@@ -55,41 +55,12 @@ public class Tscase {
 
     @Test
     public void testcase2() throws Exception {
-        Seller_level seller_level= MySql.Seller_levelMapper();
-        Seller_dsr seller_dsr= MySql.Seller_dsrMapper();
-        Ymt_SellerBasicInfo ymt_sellerBasicInfo=SqlServer.Ymt_SellerBasicInfoMapper();
-        Ymt_SellerInfo ymt_sellerInfo=SqlServer.Ymt_SellerInfoMapper();
-        Ymt_DSRAverageStatistics ymt_dsrAverageStatistics= MySql.Ymt_DSRAverageStatisticsMapper();
-        Ymt_SellerManagingAbilityDTO ymt_sellerManagingAbilityDTO=SqlServer.Ymt_SellerManagingAbilityDTOMapper();
-        Ymt_ProdLiveVideoStandard ymt_prodLiveVideoStandard=SqlServer.Ymt_ProdLiveVideoStandardMapper();
-        //初始化数据
-        ymt_prodLiveVideoStandard.delete_BySellerId(SellerId);
 
-        ymt_sellerInfo.update_ApproveTime_BySellerId(SellerId,61);
 
-        seller_level.update_sellerLevel_BySellerId(SellerId,"Top");
 
-        seller_dsr.update_sellerDsr_BySellerId(SellerId,5.55);
-
-        //获取买手判定的大洲ID
-        int continentID=db.getSellerContinentID(SellerId).get("ContinentID").intValue();
-        //大洲表最大的日期
-        String Ddate=ymt_dsrAverageStatistics.select_MaxDdate();
-
-        ymt_dsrAverageStatistics.update_PerDSR_ByContinentID(continentID,4.44,Ddate);
-
-        ymt_sellerManagingAbilityDTO.insert_item_ByParameters(SellerId,
-                0.000, 0.000, 0.000, 0.000);
-
-        //展示初始化后的数据
-        System.out.println(db.getDataTool(SellerId));
-
-        //调用接口，预期返回Ok
-        String res= req.requestGet(url,null);
-        Assert.assertEquals(res,"ok");
+        Assert.assertEquals(22,"ok");
 
         //测试数据落地
-        status=(int)ymt_prodLiveVideoStandard.select_item_BySellerId(SellerId).get(0).get("Status");
         Assert.assertEquals(status,1,"数据落地为1");
 
 
