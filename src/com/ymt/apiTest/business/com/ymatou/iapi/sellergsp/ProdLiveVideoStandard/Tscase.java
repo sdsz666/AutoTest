@@ -1,4 +1,4 @@
-package apiTest.business.com.ymatou.iapi.sellergsp.ProdLiveVideoStandard;
+package com.ymt.apiTest.business.com.ymatou.iapi.sellergsp.ProdLiveVideoStandard;
 
 
 import com.ymt.apiTest.DbTools.Mysql.MySql;
