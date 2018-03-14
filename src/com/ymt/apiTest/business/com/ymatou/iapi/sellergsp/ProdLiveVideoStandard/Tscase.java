@@ -1,10 +1,10 @@
 package apiTest.business.com.ymatou.iapi.sellergsp.ProdLiveVideoStandard;
 
 
-import apiTest.DbTools.Mysql.MySql;
-import apiTest.DbTools.SqlServer.SqlServer;
-import apiTest.base.HttpClientUtil;
-import apiTest.DbTools.SqlServer.Ymt_ProdLiveVideoStandard;
+import com.ymt.apiTest.DbTools.Mysql.MySql;
+import com.ymt.apiTest.DbTools.SqlServer.SqlServer;
+import com.ymt.apiTest.base.HttpClientUtil;
+import com.ymt.apiTest.DbTools.SqlServer.Ymt_ProdLiveVideoStandard;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package apiTest.DbTools.SqlServer;
+package com.ymt.apiTest.DbTools.SqlServer;
 
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;

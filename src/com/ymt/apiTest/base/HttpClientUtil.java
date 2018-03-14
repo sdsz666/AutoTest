@@ -1,4 +1,4 @@
-package apiTest.base;
+package com.ymt.apiTest.base;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.http.Consts;

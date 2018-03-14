@@ -1,4 +1,4 @@
-package apiTest.base;
+package com.ymt.apiTest.base;
 
 import java.sql.*;
 

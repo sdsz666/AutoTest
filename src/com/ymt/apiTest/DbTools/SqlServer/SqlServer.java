@@ -1,6 +1,6 @@
-package apiTest.DbTools.SqlServer;
+package com.ymt.apiTest.DbTools.SqlServer;
 
-import apiTest.base.database.SqlSessionFactoryBuild;
+import com.ymt.apiTest.base.database.SqlSessionFactoryBuild;
 
 public class SqlServer {
     public static Ymt_ProdLiveVideoStandard Ymt_ProdLiveVideoStandardMapper(){

@@ -1,6 +1,6 @@
-package apiTest.DbTools.Mysql;
+package com.ymt.apiTest.DbTools.Mysql;
 
-import apiTest.base.database.SqlSessionFactoryBuild;
+import com.ymt.apiTest.base.database.SqlSessionFactoryBuild;
 
 public class MySql {
     public static Seller_dsr Seller_dsrMapper(){

@@ -1,4 +1,4 @@
-package apiTest.base.database;
+package com.ymt.apiTest.base.database;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;

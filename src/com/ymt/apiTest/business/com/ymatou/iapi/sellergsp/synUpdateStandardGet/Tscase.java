@@ -1,12 +1,12 @@
-package apiTest.business.com.ymatou.iapi.sellergsp.synUpdateStandardGet;
+package com.ymt.apiTest.business.com.ymatou.iapi.sellergsp.synUpdateStandardGet;
 
 
-import apiTest.DbTools.Mysql.MySql;
-import apiTest.DbTools.Mysql.Seller_dsr;
-import apiTest.DbTools.Mysql.Seller_level;
-import apiTest.DbTools.Mysql.Ymt_DSRAverageStatistics;
-import apiTest.DbTools.SqlServer.*;
-import apiTest.base.HttpClientUtil;
+import com.ymt.apiTest.DbTools.Mysql.MySql;
+import com.ymt.apiTest.DbTools.Mysql.Seller_dsr;
+import com.ymt.apiTest.DbTools.Mysql.Seller_level;
+import com.ymt.apiTest.DbTools.Mysql.Ymt_DSRAverageStatistics;
+import com.ymt.apiTest.DbTools.SqlServer.*;
+import com.ymt.apiTest.base.HttpClientUtil;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

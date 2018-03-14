@@ -1,4 +1,4 @@
-package apiTest.DbTools.Mysql;
+package com.ymt.apiTest.DbTools.Mysql;
 
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
