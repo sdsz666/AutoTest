@@ -13,6 +13,7 @@ public interface Ymt_sellerbasicinfo {
     public int update_ContinentIdandCountryId(@Param("SellerID")int SellerID,@Param("CountryId")int CountryId,@Param("ContinentID")int ContinentID);
 
     @Select("select ContinentID,CountryId from ymt_sellerbasicinfo where SellerID=425340 ")
+    @Options(flushCache = true)
     public Map<String,Integer>select_CCID_BySellerId(@Param("SellerID")int SellerID);
 
 }

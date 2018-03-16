@@ -8,7 +8,7 @@ import java.util.Map;
 public interface Ymt_ProdLiveVideoStandard {
     @Select("select  * from Ymt_ProdLiveVideoStandard where SellerID= #{SellerID}")
     @Options(flushCache = true)
-    public List<Map<String,Object>> select_item_BySellerId(@Param("SellerID")int SellerID);
+    public Map<String,Object> select_item_BySellerId(@Param("SellerID")Integer SellerID);
 
     @Delete("delete  from Ymt_ProdLiveVideoStandard where SellerID= #{SellerID}")
     @Options(flushCache = true)
@@ -19,9 +19,16 @@ public interface Ymt_ProdLiveVideoStandard {
     public int insert_BySellerIdAndStatus(@Param("SellerID")int SellerID, @Param("Status")int Status);
 
 
- /*   @Select("select top 1 * from ymt_orderInfo where scatalogid='ef6f28e2-fc8c-4da5-84e2-21dc34bbd9fa'")
+    @Select("select * from Ymt_ProdLiveVideoStandard  where status=1")
     @Options(flushCache = true)
-    public Map<String,Object> selectSqlServer_Ymt_ProdLiveVideoStandard_BySellerId111();*/
+    public List<Map<String,Object>> test();
 
+    @Select("select * from Ymt_ProdLiveVideoStandard  where sellerID=8888801")
+    @Options(flushCache = true)
+    public List<Map<String,Object>> test2();
+
+    @Select("select * from ymt_SellerBasicInfo where CountryId=50")
+    @Options(flushCache = true)
+    public List<Map<String,Object>> test3();
 
 }
